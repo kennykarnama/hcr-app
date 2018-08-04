@@ -1,4 +1,4 @@
-<button class="tertiary">
+<button class="tertiary" type="button" (click)="showModal()">
     New
 </button>
 <div class="card fluid">
@@ -48,4 +48,26 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<label for="modal-control">Show modal</label>
+
+<input type="checkbox" id="modal-control" class="modal">
+<div [ngClass]="{'modal-singkatan': this.isModalVisible }">
+  <div class="card" >
+    <div for="modal-control" class="modal-close" (click)="closeModal()"></div>
+    <h3 class="section">Singkatan</h3>
+    <form class="section">
+        <fieldset>
+            <label>Singkatan</label>
+            <input type="text" #singkatan>
+            <label>Makna</label>
+            <input type="text" #makna>
+        </fieldset> 
+        <div class="button-group">
+          <button class="tertiary" type="button">Submit</button>
+          <button class="secondary" (click)="closeModal()" type="button">Cancel</button>
+       </div>       
+    </form>
+  </div>
 </div>

@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeContentComponent } from './home-content/home-content.component';
 import { SingkatanContentComponent } from './singkatan-content/singkatan-content.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SingkatanContentComponent } from './singkatan-content/singkatan-content
     NavComponent,
     FooterComponent,
     HomeContentComponent,
-    SingkatanContentComponent
+    SingkatanContentComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,

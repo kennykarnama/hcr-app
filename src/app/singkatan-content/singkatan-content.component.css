@@ -1,0 +1,8 @@
+div.modal-singkatan{
+	display: flex;
+	position: absolute;
+	z-index: 1210;
+}
+div.close{
+	display: none;
+}

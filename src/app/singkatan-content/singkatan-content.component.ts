@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-singkatan-content',
@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingkatanContentComponent implements OnInit {
 
-  constructor() { }
+  isModalVisible: boolean;
+
+  constructor() { 
+
+  }
 
   ngOnInit() {
+  	this.isModalVisible = false;
+  }
+
+  showModal(){
+  	this.isModalVisible = !this.isModalVisible;
+  }
+
+  closeModal(){
+  	this.isModalVisible = false;
   }
 
 }
