@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeContentService } from './home-content.service';
+import { About } from './About';
 
 @Component({
   selector: 'app-home-content',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private homeContentService: HomeContentService) { }
 
+  private about;
   ngOnInit() {
+  	this.getAbout();
+  }
+  /**
+   * Get about
+   */
+  getAbout(){
+  	this.homeContentService.getAbout().subscribe(
+  		about=>{
+  			this.about = about;
+  			console.log(about);
+  		}
+  	);
   }
 
 }

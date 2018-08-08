@@ -1,6 +1,7 @@
 <button class="tertiary" type="button" (click)="showModal()">
     New
 </button>
+
 <div class="card fluid">
     <div class="section" style="text-align: center;">
         <h3>
@@ -10,9 +11,6 @@
     <table class="striped">
         <thead>
             <tr>
-                <th>
-                    No
-                </th>
                 <th>
                     Singkatan
                 </th>
@@ -25,32 +23,30 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td data-label="No">
-                    Chad
-                </td>
+            <tr *ngFor="let singkatan of singkatans">
                 <td data-label="Singkatan">
-                    Wilberts
+                    {{singkatan.abbreviation}}
                 </td>
                 <td data-label="Makna">
-                    MrOne
+                    <ul *ngIf="isArray(singkatan.meaning);else meaning_not_array">
+                        <li *ngFor="let item of singkatan.meaning">
+                            {{item}}
+                        </li>
+                    </ul>
+                    <ng-template #meaning_not_array>
+                        {{singkatan.meaning}}
+                    </ng-template>
                 </td>
-                <td data-label="Actions">
+                <td>
                     <div class="button-group">
-                        <button class="primary">
-                            Edit
-                        </button>
-                        <button class="danger">
-                            Delete
-                        </button>
+                        <div class="button" type="button">Edit</div>
+                        <div class="button" type="button">Delete</div>
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-
-<label for="modal-control">Show modal</label>
 
 <input type="checkbox" id="modal-control" class="modal">
 <div [ngClass]="{'modal-singkatan': this.isModalVisible }">
