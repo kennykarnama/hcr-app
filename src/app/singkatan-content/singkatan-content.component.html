@@ -1,7 +1,7 @@
 <button class="tertiary" type="button" (click)="showModal()">
     New
 </button>
-
+<span class="toast" *ngIf="isRespMessageEmpty()">{{respMessage}}</span>
 <div class="card fluid">
     <div class="section" style="text-align: center;">
         <h3>
@@ -39,14 +39,22 @@
                 </td>
                 <td>
                     <div class="button-group">
-                        <div class="button" type="button">Edit</div>
-                        <div class="button" type="button">Delete</div>
+                        <div class="button" type="button" (click)="showEditModal(singkatan)">Edit Makna</div>
+                         <div class="button" type="button" (click)="showEditModal(singkatan)">Tambah Makna</div>   
+                        
                     </div>
+                    <div class="button-group">
+                        <div class="button secondary" type="button" (click)="deleteSingkatan(singkatan)">Delete</div>
+                    
+                    </div>
+                     
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
 
 <input type="checkbox" id="modal-control" class="modal">
 <div [ngClass]="{'modal-singkatan': this.isModalVisible }">
@@ -61,8 +69,36 @@
             <input type="text" #makna>
         </fieldset> 
         <div class="button-group">
-          <button class="tertiary" type="button">Submit</button>
+          <button class="tertiary" type="button" (click)="insertSingkatan(singkatan.value,makna.value)">Submit</button>
           <button class="secondary" (click)="closeModal()" type="button">Cancel</button>
+       </div>       
+    </form>
+  </div>
+</div>
+
+
+<input type="checkbox" id="modal-control" class="modal">
+<div [ngClass]="{'modal-singkatan': isEditModalVisible }">
+  <div class="card" >
+    <div for="modal-control" class="modal-close" (click)="closeEditModal()"></div>
+    <h3 class="section">Edit Singkatan</h3>
+    <form class="section" *ngIf="selectedSingkatan" #edit_singkatan="ngForm">
+        <fieldset>
+            <label>Singkatan</label>
+            <input disabled="true" type="text" #edit_singkatan value="{{selectedSingkatan.abbreviation}}">
+            <label>Daftar Makna</label>
+            <div *ngFor="let item of selectedSingkatan.meaning;let i=index">
+                <input
+                [name]="item"
+                [ngModel]="item"
+                type="text"
+                (keyup.enter)="onEnterMeaningUpdate($event.target.value,i)"
+                >
+            </div>
+        </fieldset> 
+        <div class="button-group">
+          <button class="tertiary" type="button">Update</button>
+          <button class="secondary" (click)="closeEditModal()" type="button">Cancel</button>
        </div>       
     </form>
   </div>

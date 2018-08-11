@@ -5,9 +5,18 @@ import { catchError } from 'rxjs/operators';
 import { Singkatan } from './Singkatan';
 
 
+const httpOptions = {
+  headers: new HttpHeaders ({
+    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin':'*'
+  })
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class SingkatanService {
 
   API_SERVER = 'http://localhost:8000';
@@ -27,6 +36,34 @@ export class SingkatanService {
   listSingkatan():Observable<Singkatan[]>{
   	return this.http.get<Singkatan[]>(this.API_SERVER+this.SINGKATAN_ENDPOINT)
   	.pipe(catchError(this.handleError));
+  }
+  /**
+   * Create new abbreviation
+   * @param  {Singkatan}             s 
+   * @return {Observable<Singkatan>}
+   */
+  insertSingkatan(s:Singkatan):Observable<Singkatan>{
+    return this.http.post<Singkatan>(
+      this.API_SERVER+this.SINGKATAN_ENDPOINT,
+      s
+    ).pipe(catchError(this.handleError));
+  }
+  /**
+   * Delete abbreviation
+   * @param  {Singkatan}             s
+   * @return {Observable<Singkatan>}
+   */
+  deleteSingkatan(s:Singkatan):Observable<Singkatan>{
+    return this.http.delete<Singkatan>(
+      this.API_SERVER+this.SINGKATAN_ENDPOINT+'/'+s.abbreviation
+      ).pipe(catchError(this.handleError));
+  }
+
+  updateSingkatan(newSingkatan:Singkatan):Observable<Singkatan>{
+      return this.http.put<Singkatan>(
+        this.API_SERVER+this.SINGKATAN_ENDPOINT+this.UPDATE_SINGKATAN_ENDPOINT+"/"+newSingkatan.abbreviation,
+        newSingkatan
+        ).pipe(catchError(this.handleError));
   }
 
   /**

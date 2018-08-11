@@ -3,6 +3,6 @@
  */
 export interface Singkatan{
 	abbreviation: string;
-	makna:string[];
+	meaning:any;
     status: string;
 }
